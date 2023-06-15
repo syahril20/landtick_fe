@@ -13,6 +13,16 @@ const loginFaied = (error) => ({
   payload: error,
 });
 
+const logout = () => ({
+  type: auth.LOGOUT,
+});
+
+export const logoutFunc = () => {
+  return function (dispatch) {
+    dispatch(logout());
+    Swal.fire("LOGOUT SUKSES");
+  };
+};
 export const loginFunc = (dataLogin) => {
   return function (dispatch) {
     dispatch(login());
@@ -22,7 +32,7 @@ export const loginFunc = (dataLogin) => {
         dispatch(loginSuccess(response.data.data));
       })
       .catch((error) => {
-        Swal.fire(error.response.data.message);
+        alert("email atau password salah!");
         dispatch(loginFaied(error.response.data.message));
       });
   };
