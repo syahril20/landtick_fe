@@ -5,11 +5,16 @@ module.exports = withMT({
   content: [
     "./src/**/*.{js,jsx,ts,tsx}",
     "./public/index.html",
+    "./node_modules/tw-elements/dist/js/**/*.js"
   ],
   theme: {
-    extend: {},
+    extend: {
+      colors: {
+        g1: "#EC7AB7",
+        g2: "#EC7A7A",
+      },
+    },
   },
-  plugins: [
-    require("tw-elements/dist/plugin.cjs")
-  ],
+  plugins: [require("tw-elements/dist/plugin.cjs")],
+  darkMode: "class"
 });
