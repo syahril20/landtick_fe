@@ -18,6 +18,12 @@ export const authReducer = (state = AUTH_STATE, action) => {
       return { ...state, loading: false, error: payload };
     case auth.LOGOUT:
       return { ...state, loading: null, user: null, token: null, error: null };
+    case auth.REGISTER:
+      return { ...state, loading: true };
+    case auth.REGISTER_SUCCESS:
+      return { ...state, loading: false, user: payload, error: null };
+    case auth.REGISTER_FAILED:
+      return { ...state, loading: false, error: payload };
     default:
       return state;
   }

@@ -28,12 +28,59 @@ export const loginFunc = (dataLogin) => {
     dispatch(login());
     API.post("/login", dataLogin)
       .then((response) => {
-        Swal.fire("SUKSES");
+        Swal.fire({
+          title: "Login Success",
+          className: "swal2-container",
+        });
         dispatch(loginSuccess(response.data.data));
       })
       .catch((error) => {
-        alert("email atau password salah!");
+        const Toast = Swal.mixin({
+          toast: true,
+          position: 'top-end',
+          showConfirmButton: false,
+          timer: 3000,
+          timerProgressBar: true,
+          didOpen: (toast) => {
+            toast.addEventListener('mouseenter', Swal.stopTimer)
+            toast.addEventListener('mouseleave', Swal.resumeTimer)
+          }
+        })
+        
+        Toast.fire({
+          icon: 'warning',
+          title: 'Email Atau Password Salah',
+          className:"swal2-container"          
+        })
         dispatch(loginFaied(error.response.data.message));
       });
   };
 };
+
+const register = () => ({
+  type: auth.REGISTER,
+});
+const registerSuccess = (data) => ({
+  type: auth.REGISTER_SUCCESS,
+  payload: data,
+});
+const registerFaied = (error) => ({
+  type: auth.REGISTER_FAILED,
+  payload: error,
+});
+
+export const registerFunc = (dataRegister) => {
+  return function (dispatch) {
+    dispatch(register());
+    API.post("/register", dataRegister)
+      .then((response) => {
+        Swal.fire("SUKSES");
+        dispatch(registerSuccess(response.data.data));
+      })
+      .catch((error) => {
+        alert(error.response.data.message);
+        dispatch(registerFaied(error.response.data.message));
+      });
+  };
+};
+
