@@ -3,15 +3,17 @@ import { persistReducer } from "redux-persist";
 import storage from "redux-persist/lib/storage";
 import { authReducer } from "./auth";
 import { keretaReducer } from "./kereta";
+import { transaksiReducer } from "./transaksi";
 const persistConfig = {
   key: "root",
   storage,
-  whitelist: ["auth","kereta"],
+  whitelist: ["auth","kereta","transaksi"],
 };
 
 const reducer = combineReducers({
     auth : authReducer,
-    kereta: keretaReducer
+    kereta: keretaReducer,
+    transaksi: transaksiReducer
 });
 
 export default persistReducer(persistConfig, reducer);

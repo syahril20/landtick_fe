@@ -19,7 +19,7 @@ import trainLogo from "../assets/trainLogo.png";
 import { loginFunc } from "../config/redux/action/auth";
 import { API_KERETA } from "../config/api/api";
 import { get_keretaFunc } from "../config/redux/action/kereta";
-import Footer from "../component/footer";
+import Footer from "../component/footer/footer";
 
 const TABLE_HEAD = [
   "Nama Kereta",
