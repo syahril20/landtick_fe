@@ -1,6 +1,7 @@
 import * as auth from "../constant/auth";
 import { API } from "../../api/api";
 import Swal from "sweetalert2";
+
 const login = () => ({
   type: auth.LOGIN,
 });
