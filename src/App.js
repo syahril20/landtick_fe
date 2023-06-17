@@ -8,49 +8,35 @@ import {
   PrivateRouteAdmin,
   PrivateRouteLogin,
   PrivateRouteUser,
+  PublicRoute,
 } from "./config/root/private";
 import Tiket from "./views/user/tiket";
 import AddTiket from "./views/admin/tiket";
 
 function App() {
-
-
   console.log("WADUH");
   const auth = useSelector((state) => state.auth);
   return (
     <>
-      <ComplexNavbar token={auth?.user?.token}/>
+      <ComplexNavbar token={auth?.user?.token} />
       <Routes>
-        
 
+        
         {/* ADMIN */}
         <Route element={<PrivateRouteAdmin />}>
-          <Route
-            exact
-            path="/admin"
-            element={<Admin token={auth?.user?.token}/>}
+          <Route path="/admin" element={<Admin token={auth?.user?.token} />} />
+          <Route path="/addTiket" element={<AddTiket token={auth?.user?.token} />}
           />
-          <Route
-            exact
-            path="/addTiket"
-            element={<AddTiket token={auth?.user?.token}/>}
-          />
-         
         </Route>
-        
-        
+
         {/* USER */}
         <Route element={<PrivateRouteUser />}>
-          <Route
-            exact
-            path="/"
-            element={<Home token={auth?.user?.token}/>}
-          />
-          <Route
-            exact
-            path="/tiket/:id"
-            element={<Tiket />}
-          />
+          <Route exact path="/tiket-saya" element={<Tiket />} />
+        </Route>
+
+        {/* PUBLIC */}
+        <Route element={<PublicRoute />}>
+          <Route exact path="/" element={<Home token={auth?.user?.token}/>} />
         </Route>
       </Routes>
     </>
