@@ -34,25 +34,26 @@ export const loginFunc = (dataLogin) => {
           className: "swal2-container",
         });
         dispatch(loginSuccess(response.data.data));
+        window.location.reload();
       })
       .catch((error) => {
         const Toast = Swal.mixin({
           toast: true,
-          position: 'top-end',
+          position: "top-end",
           showConfirmButton: false,
           timer: 3000,
           timerProgressBar: true,
           didOpen: (toast) => {
-            toast.addEventListener('mouseenter', Swal.stopTimer)
-            toast.addEventListener('mouseleave', Swal.resumeTimer)
-          }
-        })
-        
+            toast.addEventListener("mouseenter", Swal.stopTimer);
+            toast.addEventListener("mouseleave", Swal.resumeTimer);
+          },
+        });
+
         Toast.fire({
-          icon: 'warning',
-          title: 'Email Atau Password Salah',
-          className:"swal2-container"          
-        })
+          icon: "warning",
+          title: "Email Atau Password Salah",
+          className: "swal2-container",
+        });
         dispatch(loginFaied(error.response.data.message));
       });
   };
@@ -84,4 +85,3 @@ export const registerFunc = (dataRegister) => {
       });
   };
 };
-

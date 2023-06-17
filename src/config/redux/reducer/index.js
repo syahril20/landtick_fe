@@ -5,17 +5,19 @@ import { authReducer } from "./auth";
 import { tiketReducer } from "./tiket";
 import { transaksiReducer } from "./transaksi";
 import { userReducer } from "./user";
+import { keretaReducer } from "./kereta";
 const persistConfig = {
   key: "root",
   storage,
-  whitelist: ["auth", "tiket", "transaksi", "user"],
+  whitelist: ["auth", "tiket", "transaksi", "user", "kereta"],
 };
 
 const reducer = combineReducers({
   auth: authReducer,
   tiket: tiketReducer,
   transaksi: transaksiReducer,
-  user: userReducer
+  user: userReducer,
+  kereta: keretaReducer,
 });
 
 export default persistReducer(persistConfig, reducer);
