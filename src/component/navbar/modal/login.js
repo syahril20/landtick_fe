@@ -7,8 +7,8 @@ import {
   Typography,
 } from "@material-tailwind/react";
 import React, { useState } from "react";
-import { loginFunc } from "../../../config/redux/action/auth";
 import { useDispatch } from "react-redux";
+import { loginFunc } from "../../../config/redux/action/auth";
 
 export default function Login(props) {
   const dispatch = useDispatch();
@@ -20,12 +20,12 @@ export default function Login(props) {
   const HandleSubmit = (e) => {
     e.preventDefault();
     dispatch(loginFunc(form));
-    props.HanleLogin();
     setForm({
       username: "",
       password: "",
     });
   };
+  
   return (
     <>
       <Dialog

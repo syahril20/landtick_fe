@@ -41,7 +41,7 @@ export default function TiketList() {
                   <div
                     className="col-span-6 grid grid-cols-6 bg-white py-5 mb-4 rounded-md shadow-md cursor-pointer"
                     onClick={() => {
-                      user?.role_id === 2 ? Nav(`/tiket/${tiked.id_tiket}`) : Swal.fire("MEMEK");
+                      user?.role_id === 2 ? Nav(`/tiket/${tiked.id_tiket}`) : Swal.fire("HARAP LOGIN");
                     }}
                   >
                     <div>

@@ -1,32 +1,30 @@
 import {
   Avatar,
   Button,
-  Card,
-  CardBody,
-  CardFooter,
-  Dialog,
   Menu,
   MenuHandler,
   MenuList,
   Navbar,
-  Typography,
+  Typography
 } from "@material-tailwind/react";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import LT from "../../assets/LandTick.png";
 import Train from "../../assets/Train.png";
 import {
-  loginFunc,
-  logoutFunc,
-  registerFunc,
+  logoutFunc
 } from "../../config/redux/action/auth";
+import { transaksiFunc } from "../../config/redux/action/transaksi";
+import { userFunc } from "../../config/redux/action/user";
 import Login from "./modal/login";
 import Register from "./modal/register";
 
-export default function Example() {
-  const [openReg, setOpenReg] = React.useState(false);
-  const [openLog, setOpenLog] = React.useState(false);
+export default function Example({ token }) {
+  const dispatch = useDispatch();
+
+  const [openReg, setOpenReg] = useState(false);
+  const [openLog, setOpenLog] = useState(false);
   const HandleRegister = () => {
     setOpenReg((reg) => !reg);
     setOpenLog(false);
@@ -35,16 +33,19 @@ export default function Example() {
     setOpenLog(!openLog);
     setOpenReg(false);
   };
+  useEffect(() => {
+    dispatch(transaksiFunc(token));
+    dispatch(userFunc(token));
+  }, [dispatch, token]);
 
-  
+ 
+
+
   const Nav = useNavigate();
-  const dispatch = useDispatch();
   const state = useSelector((state) => state);
   const login = state.auth;
   const user = state.user.user;
   console.log(user, "INI MEME");
-
- 
 
   console.log(login, "CUK");
 
@@ -103,12 +104,12 @@ export default function Example() {
                       <div className="flex">
                         <button
                           onClick={() => {
-                            Nav("/in-trip");
+                            Nav("/addTiket");
                           }}
                           className="flex items-center gap-4"
                         >
                           <img src="" alt="waw" />
-                          <p className="font-bold text-black text-base">Trip</p>
+                          <p className="font-bold text-black text-base">Tambah Tiket</p>
                         </button>
                       </div>
                       <div className="border border-black w-full" />

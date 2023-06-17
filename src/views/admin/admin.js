@@ -22,7 +22,7 @@ export default function Admin({ token }) {
   useEffect(() => {
     dispatch(transaksiFunc(token));
     dispatch(userFunc(token))
-  }, [dispatch]);
+  }, [token, dispatch]);
 
   const Transaksi = useSelector((state) => state.transaksi.transaksi);
   console.log(Transaksi, "INI ANJAY");

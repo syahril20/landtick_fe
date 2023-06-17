@@ -82,11 +82,12 @@ export default function Search() {
                             label="Select Version"
                             className="text-center w-[100px] h-7 border-2 border-[#B1B1B1] rounded-md"
                           >
-                            <option>1</option>
-                            <option>2</option>
-                            <option>3</option>
-                            <option>4</option>
-                            <option>5</option>
+                            <option value={0}>0</option>
+                            <option value={1}>1</option>
+                            <option value={2}>2</option>
+                            <option value={3}>3</option>
+                            <option value={4}>4</option>
+                            <option value={5}>5</option>
                           </select>
                         </div>
                         <div className="flex flex-col gap-2">
@@ -96,11 +97,12 @@ export default function Search() {
                             label="Select Version"
                             className="text-center w-[100px] h-7 border-2 border-[#B1B1B1] rounded-md"
                           >
-                            <option>1</option>
-                            <option>2</option>
-                            <option>3</option>
-                            <option>4</option>
-                            <option>5</option>
+                            <option value={0}>0</option>
+                            <option value={1}>1</option>
+                            <option value={2}>2</option>
+                            <option value={3}>3</option>
+                            <option value={4}>4</option>
+                            <option value={5}>5</option>
                           </select>
                         </div>
                         <div className="flex items-end">

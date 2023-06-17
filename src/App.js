@@ -10,13 +10,16 @@ import {
   PrivateRouteUser,
 } from "./config/root/private";
 import Tiket from "./views/user/tiket";
+import AddTiket from "./views/admin/tiket";
 
 function App() {
+
+
   console.log("WADUH");
   const auth = useSelector((state) => state.auth);
   return (
     <>
-      <ComplexNavbar />
+      <ComplexNavbar token={auth?.user?.token}/>
       <Routes>
         
 
@@ -25,7 +28,12 @@ function App() {
           <Route
             exact
             path="/admin"
-            element={<Admin token={auth?.user?.token} />}
+            element={<Admin token={auth?.user?.token}/>}
+          />
+          <Route
+            exact
+            path="/addTiket"
+            element={<AddTiket token={auth?.user?.token}/>}
           />
          
         </Route>

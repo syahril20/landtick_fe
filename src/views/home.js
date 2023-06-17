@@ -18,18 +18,19 @@ import { userFunc } from "../config/redux/action/user";
 
 function Home({token}) {
   // const [tiket, setTiket] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getTiketFunc());
     dispatch(userFunc(token))
-  }, [dispatch]);
+  }, [dispatch,token]);
 
-  const [loading, setLoading] = useState(true);
   setTimeout(() => {
     setLoading(false);
   }, 3000);
   const state = useSelector((state) => state);
+
   const tiket = state?.tiket?.tiket;
   const user = state?.auth.user;
   console.log(state);
