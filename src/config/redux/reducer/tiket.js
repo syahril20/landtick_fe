@@ -15,6 +15,8 @@ export const tiketReducer = (state = TIKET_STATE, action) => {
       return { ...state, loading: false, tiket: payload, error: null };
     case tiket.GET_TIKET_FAILED:
       return { ...state, loading: false, error: payload };
+    case tiket.ORDER:
+      return { ...state, order: payload };
     default:
       return state;
   }

@@ -34,7 +34,9 @@ export const loginFunc = (dataLogin) => {
           className: "swal2-container",
         });
         dispatch(loginSuccess(response.data.data));
-        window.location.reload();
+        setTimeout(() => {
+          window.location.reload();
+        }, 1000);
       })
       .catch((error) => {
         const Toast = Swal.mixin({

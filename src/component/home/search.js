@@ -1,8 +1,42 @@
 import { Button, Tab, Tabs, TabsBody } from "@material-tailwind/react";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import swap from "../../assets/Swap.png";
 import trainLogo from "../../assets/trainLogo.png";
-export default function Search() {
+import { Typography } from "@material-tailwind/react";
+import { useDispatch, useSelector } from "react-redux";
+import arrow from "../../assets/Arrow.png";
+import Swal from "sweetalert2";
+import { useNavigate } from "react-router-dom";
+import { AddOrder } from "../../config/redux/action/tiket";
+import { AddtransaksiFunc } from "../../config/redux/action/transaksi";
+export default function Search({ token }) {
+  const TABLE_HEAD = [
+    "Nama Kereta",
+    "Berangkat",
+    "",
+    "Tiba",
+    "Durasi",
+    "Harga Per Orang",
+  ];
+  const dispatch = useDispatch();
+  const state = useSelector((state) => state);
+  const tiket = state?.tiket?.tiket;
+  const user = state?.auth.user;
+  const users = state?.user.user;
+  const order = state?.tiket?.order;
+  const Nav = useNavigate();
+
+  const [dewasa, setDewasa] = useState(0);
+  const [anak, setAnak] = useState(0);
+  const [pp, setPp] = useState(false);
+  const [qty, setQty] = useState();
+
+  useEffect(() => {
+    setQty(parseInt(dewasa) + parseInt(anak));
+  }, [dewasa, anak]);
+
+  const date = new Date();
+  console.log(order, "WAW");
   return (
     <>
       <div className="animate__animated animate__fadeInDown">
@@ -50,6 +84,9 @@ export default function Search() {
                             <input
                               type="checkbox"
                               className="border-2 border-[#B1B1B1] rounded-md mr-2"
+                              onChange={(e) => {
+                                setPp(!pp);
+                              }}
                             />
                             <label className="font-extrabold text-[14px]">
                               Pulang Pergi
@@ -81,8 +118,11 @@ export default function Search() {
                           <select
                             label="Select Version"
                             className="text-center w-[100px] h-7 border-2 border-[#B1B1B1] rounded-md"
+                            onChange={(e) => {
+                              setDewasa(e.target.value);
+                              console.log(e.target.value);
+                            }}
                           >
-                            <option value={0}>0</option>
                             <option value={1}>1</option>
                             <option value={2}>2</option>
                             <option value={3}>3</option>
@@ -96,6 +136,10 @@ export default function Search() {
                           <select
                             label="Select Version"
                             className="text-center w-[100px] h-7 border-2 border-[#B1B1B1] rounded-md"
+                            onChange={(e) => {
+                              setAnak(e.target.value);
+                              console.log(e.target.value);
+                            }}
                           >
                             <option value={0}>0</option>
                             <option value={1}>1</option>
@@ -117,6 +161,94 @@ export default function Search() {
               </div>
             </TabsBody>
           </Tabs>
+        </div>
+      </div>
+
+      <div className="animate__animated animate__fadeInDown">
+        <div className="h-full mx-[5%]">
+          <div className="grid grid-cols-6 gap-4 text-center">
+            {TABLE_HEAD.map((head) => (
+              <div key={head} className=" pb-4 px-4">
+                <Typography
+                  variant="small"
+                  color="blue-gray"
+                  className="font-normal leading-none opacity-70"
+                >
+                  {head}
+                </Typography>
+              </div>
+            ))}
+
+            {tiket?.map((tiked) => {
+              return (
+                <>
+                  {/* <Link to={`tiket/${tiked.id_tiket}`} className="col-span-6 grid grid-cols-6 bg-white py-5 mb-4 rounded-md shadow-md"> */}
+                  <div
+                    className="col-span-6 grid grid-cols-6 bg-white py-5 mb-4 rounded-md shadow-md cursor-pointer"
+                    onClick={() => {
+                      if (user?.role_id === 2) {
+                        let a;
+                        if (pp) {
+                          a =
+                            (tiked.harga * dewasa +
+                              (tiked.harga * anak * 1) / 2) *
+                            2;
+                        } else {
+                          a =
+                            tiked.harga * dewasa + (tiked.harga * anak * 1) / 2;
+                        }
+                        let data = {
+                          tanggal_transaksi: date,
+                          qty: qty,
+                          total: a,
+                          status: "pending",
+                          id_user: users.id_user,
+                          id_tiket: tiked.id_tiket,
+                        };
+                        dispatch(AddOrder(data));
+                        dispatch(AddtransaksiFunc(order, token));
+                        
+                      } else {
+                        Swal.fire("HARAP LOGIN");
+                      }
+                    }}
+                  >
+                    <div>
+                      <p className="font-extrabold">{tiked.nama_kereta}</p>
+                      <p className="text-[#B7B7B7] text-[12px]">
+                        {tiked.jenis_kereta.jenis_kereta}
+                      </p>
+                    </div>
+                    <div className="">
+                      <p className="font-extrabold">{tiked.jam_berangkat}</p>
+                      <p className="text-[#B7B7B7] text-[12px]">
+                        {tiked.stasiun_berangkat}
+                      </p>
+                    </div>
+                    <div className=" flex items-center justify-center">
+                      <img src={arrow} alt="waw" />
+                    </div>
+                    <div className="">
+                      <p className="font-extrabold">{tiked.jam_tiba}</p>
+                      <p className="text-[#B7B7B7] text-[12px]">
+                        {tiked.stasiun_tujuan}
+                      </p>
+                    </div>
+                    <div>
+                      <p className="font-extrabold">5j 05m</p>
+                      <p className="text-[#B7B7B7] text-[12px]"></p>
+                    </div>
+                    <div>
+                      <p className="font-extrabold">
+                        Rp. {tiked.harga.toLocaleString("en-us")}
+                      </p>
+                    </div>
+                  </div>
+                  {/* </Link> */}
+                </>
+              );
+            })}
+          </div>
         </div>
       </div>
     </>

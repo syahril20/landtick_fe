@@ -9,10 +9,9 @@ import promo1 from "../assets/promo1.png";
 import promo2 from "../assets/promo2.png";
 
 import Footer from "../component/footer/footer";
-import Search from "../component/home/search";
-import TiketList from "../component/home/tiketlist";
 import { getTiketFunc } from "../config/redux/action/tiket";
 import { userFunc } from "../config/redux/action/user";
+import Search from "../component/home/search";
 
 
 
@@ -31,9 +30,8 @@ function Home({token}) {
   }, 3000);
   const state = useSelector((state) => state);
 
-  const tiket = state?.tiket?.tiket;
-  const user = state?.auth.user;
   console.log(state);
+  
 
   return (
     <>
@@ -63,8 +61,7 @@ function Home({token}) {
             </div>
           </div>
 
-          <Search />
-          <TiketList />
+          <Search token={token}/>
           
           <Footer />
         </>

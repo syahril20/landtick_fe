@@ -159,12 +159,12 @@ export default function Example({ token }) {
                       <div className="flex">
                         <button
                           onClick={() => {
-                            Nav("/in-trip");
+                            Nav("/tiket-saya");
                           }}
                           className="flex items-center gap-4"
                         >
                           <img src="" alt="waw" />
-                          <p className="font-bold text-black text-base">Trip</p>
+                          <p className="font-bold text-black text-base">Tiket Saya</p>
                         </button>
                       </div>
                       <div className="border border-black w-full" />

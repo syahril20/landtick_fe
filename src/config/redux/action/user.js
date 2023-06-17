@@ -23,10 +23,10 @@ export const userFunc = (token) => {
     }
     API.get("/users", config)
       .then((response) => {
-        dispatch(getUserSuccess(response.data.data));
+        dispatch(getUserSuccess(response?.data?.data));
       })
       .catch((error) => {
-        dispatch(getUserFailed(error.response.data.message));
+        dispatch(getUserFailed(error?.response?.data?.message));
       });
   };
 };

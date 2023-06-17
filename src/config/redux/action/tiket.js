@@ -78,3 +78,13 @@ export const addTiketFunc = (dataTiket, token) => {
   };
 };
 
+const ORDER = (data) => ({
+  type: tiket.ORDER,
+  payload: data,
+});
+
+export const AddOrder = (data) =>{
+  return function(dispatch) {
+    dispatch(ORDER(data)) 
+  }
+}
