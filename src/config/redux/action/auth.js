@@ -33,7 +33,7 @@ export const loginFunc = (dataLogin) => {
           title: "Login Success",
           className: "swal2-container",
         });
-        dispatch(loginSuccess(response.data.data));
+        dispatch(loginSuccess(response?.data?.data));
         setTimeout(() => {
           window.location.reload();
         }, 1000);
@@ -56,7 +56,7 @@ export const loginFunc = (dataLogin) => {
           title: "Email Atau Password Salah",
           className: "swal2-container",
         });
-        dispatch(loginFaied(error.response.data.message));
+        dispatch(loginFaied(error?.response?.data?.message));
       });
   };
 };
@@ -79,11 +79,11 @@ export const registerFunc = (dataRegister) => {
     API.post("/register", dataRegister)
       .then((response) => {
         Swal.fire("SUKSES");
-        dispatch(registerSuccess(response.data.data));
+        dispatch(registerSuccess(response?.data?.data));
       })
       .catch((error) => {
-        alert(error.response.data.message);
-        dispatch(registerFaied(error.response.data.message));
+        alert(error.response?.data?.message);
+        dispatch(registerFaied(error.response?.data?.message));
       });
   };
 };

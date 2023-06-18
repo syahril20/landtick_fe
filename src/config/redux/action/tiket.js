@@ -18,10 +18,10 @@ export const getTiketFunc = () => {
     dispatch(getTiket());
     API.get("/tiket")
       .then((response) => {
-        dispatch(getTiketSuccess(response.data.data));
+        dispatch(getTiketSuccess(response?.data?.data));
       })
       .catch((error) => {
-        dispatch(getTiketFailed(error.response.data.message));
+        dispatch(getTiketFailed(error?.response?.data?.message));
       });
   };
 };
@@ -53,7 +53,7 @@ export const addTiketFunc = (dataTiket, token) => {
           title: "SUKSES",
           className: "swal2-container",
         });
-        dispatch(addTiketSuccess(response.data.data));
+        dispatch(addTiketSuccess(response?.data?.data));
       })
       .catch((error) => {
         const Toast = Swal.mixin({
@@ -70,10 +70,10 @@ export const addTiketFunc = (dataTiket, token) => {
 
         Toast.fire({
           icon: "warning",
-          title: error.response.data.message,
+          title: error.response?.data?.message,
           className: "swal2-container",
         });
-        dispatch(addTiketFaied(error.response.data.message));
+        dispatch(addTiketFaied(error?.response?.data?.message));
       });
   };
 };

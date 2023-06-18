@@ -43,8 +43,8 @@ export default function Example({ token }) {
 
   const Nav = useNavigate();
   const state = useSelector((state) => state);
-  const login = state.auth;
-  const user = state.user.user;
+  const login = state?.auth;
+  const user = state?.user?.user;
   console.log(user, "INI MEME");
 
   console.log(login, "CUK");

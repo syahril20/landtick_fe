@@ -17,10 +17,10 @@ export const getKeretaFunc = () => {
     dispatch(getKereta());
     API.get("/kereta")
       .then((response) => {
-        dispatch(getKeretaSuccess(response.data.data));
+        dispatch(getKeretaSuccess(response?.data?.data));
       })
       .catch((error) => {
-        dispatch(getKeretaFailed(error.response.data.message));
+        dispatch(getKeretaFailed(error?.response?.data?.message));
       });
   };
 };

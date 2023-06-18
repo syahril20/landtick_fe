@@ -25,10 +25,10 @@ export const transaksiFunc = (token) => {
     }
     API.get("/transaksi", config)
       .then((response) => {
-        dispatch(getTransaksiSuccess(response.data.data));
+        dispatch(getTransaksiSuccess(response?.data?.data));
       })
       .catch((error) => {
-        dispatch(getTransaksiFailed(error.response.data.message));
+        dispatch(getTransaksiFailed(error?.response?.data?.message));
       });
   };
 };
@@ -62,7 +62,7 @@ export const AddtransaksiFunc = (order, token) => {
           className: "swal2-container",
         });
         
-        dispatch(AddTransaksiSuccess(response.data.data));
+        dispatch(AddTransaksiSuccess(response?.data?.data));
         setTimeout(() => {
           window.location.assign('/tiket-saya');
         }, 2000);
@@ -72,7 +72,52 @@ export const AddtransaksiFunc = (order, token) => {
           title: "FAILED",
           className: "swal2-container",
         });
-        dispatch(AddTransaksiFailed(error.response.data.message));
+        dispatch(AddTransaksiFailed(error?.response?.data?.message));
+      });
+  };
+};
+
+
+const DeleteTransaksi = () => ({
+  type: transaksi.DELETE_TRANSAKSI,
+});
+const DeleteTransaksiSuccess = (data) => ({
+  type: transaksi.DELETE_TRANSAKSI_SUCCESS,
+  payload: data,
+});
+const DeleteTransaksiFailed = (error) => ({
+  type: transaksi.DELETE_TRANSAKSI_FAILED,
+  payload: error,
+});
+
+export const DeletetransaksiFunc = (id, token) => {
+  // const Nav = useNavigate()
+  return function (dispatch) {
+    dispatch(DeleteTransaksi());
+    console.log(token, "INI");
+    let config = {
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
+    }
+    API.delete(`/transaksi/${id}`, config)
+      .then((response) => {
+        Swal.fire({
+          title: "SUKSES",
+          className: "swal2-container",
+        });
+        
+        dispatch(DeleteTransaksiSuccess(response?.data?.data));
+        setTimeout(() => {
+          window.location.assign('/tiket-saya');
+        }, 2000);
+      })
+      .catch((error) => {
+        Swal.fire({
+          title: "FAILED",
+          className: "swal2-container",
+        });
+        dispatch(DeleteTransaksiFailed(error?.response?.data?.message));
       });
   };
 };

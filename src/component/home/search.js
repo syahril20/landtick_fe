@@ -26,7 +26,7 @@ export default function Search({ token }) {
   const order = state?.tiket?.order;
   const Nav = useNavigate();
 
-  const [dewasa, setDewasa] = useState(0);
+  const [dewasa, setDewasa] = useState(1);
   const [anak, setAnak] = useState(0);
   const [pp, setPp] = useState(false);
   const [qty, setQty] = useState();
@@ -36,7 +36,8 @@ export default function Search({ token }) {
   }, [dewasa, anak]);
 
   const date = new Date();
-  console.log(order, "WAW");
+  console.log(order, "ORDER");
+  console.log(pp, "WAW");
   return (
     <>
       <div className="animate__animated animate__fadeInDown">
@@ -189,25 +190,24 @@ export default function Search({ token }) {
                       if (user?.role_id === 2) {
                         let a;
                         if (pp) {
-                          a =
-                            (tiked.harga * dewasa +
-                              (tiked.harga * anak * 1) / 2) *
-                            2;
+                          a = ((tiked.harga * dewasa) + ((tiked.harga * anak ) / 2)) * 2;
                         } else {
-                          a =
-                            tiked.harga * dewasa + (tiked.harga * anak * 1) / 2;
+                          a = (tiked.harga * dewasa) + ((tiked.harga * anak ) / 2);
                         }
                         let data = {
                           tanggal_transaksi: date,
-                          qty: qty,
+                          qty_dewasa: parseInt(dewasa),
+                          qty_anak: parseInt(anak),
+                          pulang_pergi: pp,
                           total: a,
                           status: "pending",
                           id_user: users.id_user,
                           id_tiket: tiked.id_tiket,
                         };
                         dispatch(AddOrder(data));
-                        dispatch(AddtransaksiFunc(order, token));
-                        
+                        setTimeout(()=>{
+                          dispatch(AddtransaksiFunc(order, token));
+                        },1000)
                       } else {
                         Swal.fire("HARAP LOGIN");
                       }
