@@ -206,7 +206,7 @@ export default function Search({ token }) {
                         };
                         dispatch(AddOrder(data));
                         setTimeout(()=>{
-                          dispatch(AddtransaksiFunc(order, token));
+                          dispatch(AddtransaksiFunc(data, token));
                         },1000)
                       } else {
                         Swal.fire("HARAP LOGIN");
