@@ -5,24 +5,22 @@ import {
   MenuHandler,
   MenuList,
   Navbar,
-  Typography
+  Typography,
 } from "@material-tailwind/react";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import LT from "../../assets/LandTick.png";
 import Train from "../../assets/Train.png";
-import {
-  logoutFunc
-} from "../../config/redux/action/auth";
+import { logoutFunc } from "../../config/redux/action/auth";
 import { transaksiFunc } from "../../config/redux/action/transaksi";
 import { userFunc } from "../../config/redux/action/user";
 import Login from "./modal/login";
 import Register from "./modal/register";
-import logout from "../../assets/logout.png"
-import addtik from "../../assets/addtik.png"
-import mytik from "../../assets/mytik.png"
-import pp from "../../assets/pp.png"
+import logout from "../../assets/logout.png";
+import addtik from "../../assets/addtik.png";
+import mytik  from "../../assets/mytik.png";
+import pp from "../../assets/pp.png";
 
 export default function Example({ token }) {
   const dispatch = useDispatch();
@@ -41,9 +39,6 @@ export default function Example({ token }) {
     dispatch(transaksiFunc(token));
     dispatch(userFunc(token));
   }, [dispatch, token]);
-
- 
-
 
   const Nav = useNavigate();
   const state = useSelector((state) => state);
@@ -113,7 +108,9 @@ export default function Example({ token }) {
                           className="flex items-center gap-4"
                         >
                           <img src={addtik} alt="waw" />
-                          <p className="font-bold text-black text-base">Tambah Tiket</p>
+                          <p className="font-bold text-black text-base">
+                            Tambah Tiket
+                          </p>
                         </button>
                       </div>
                       <div className="border border-black w-full" />
@@ -155,7 +152,7 @@ export default function Example({ token }) {
                           size="sm"
                           alt="candice wu"
                           className=""
-                          src=""
+                          src={pp}
                         />
                       </Button>
                     </MenuHandler>
@@ -168,7 +165,9 @@ export default function Example({ token }) {
                           className="flex items-center gap-4"
                         >
                           <img src={mytik} alt="waw" />
-                          <p className="font-bold text-black text-base">Tiket Saya</p>
+                          <p className="font-bold text-black text-base">
+                            Tiket Saya
+                          </p>
                         </button>
                       </div>
                       <div className="border border-black w-full" />

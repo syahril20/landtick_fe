@@ -253,22 +253,7 @@ export default function Payment({ token }) {
                         onClick={() => {
                           paym(e);
 
-                          Swal.fire({
-                            title: "Anda Yakin ?",
-                            showDenyButton: true,
-                            showCancelButton: true,
-                            confirmButtonText: "Save",
-                            denyButtonText: `Batal`,
-                          }).then((result) => {
-                            /* Read more about isConfirmed, isDenied below */
-                            if (result.isConfirmed) {
-                              Swal.fire("Saved!", "", "success");
-
-                              // window.location.assign(`/payment/${e?.id_transaksi}`)
-                            } else if (result.isDenied) {
-                              Swal.fire("Changes are not saved", "", "info");
-                            }
-                          });
+                         
                         }}
                         className="text-white font-semibold rounded px-6 py-3 bg-gradient-to-r from-g1 to-g2 w-full h-full"
                       >
